@@ -33,3 +33,22 @@ pub fn part1(input: &Input) -> i32 {
 
     password
 }
+
+pub fn part2(input: &Input) -> i32 {
+    let mut point = 50;
+    let mut password = 0;
+    let rhs = 100;
+
+    for &step in input {
+        if step >= 0 {
+            password += (point + step) / rhs;
+        } else {
+            let reversed = (rhs - point) % rhs;
+            password += (reversed - step) / rhs;
+        }
+
+       point = (point + step).rem_euclid(rhs);
+    }
+
+    password
+}
