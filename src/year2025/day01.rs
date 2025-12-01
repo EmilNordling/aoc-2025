@@ -9,12 +9,11 @@ pub fn parse(input: &str) -> Input {
                 return None;
             }
 
-            let (direction, number_str) = line.split_at(1);
-            let number: i32 = number_str.parse().ok()?;
+            let number: i32 = line[1..].parse().ok()?;
 
-            match direction {
-                "R" => Some(number),
-                "L" => Some(-number),
+            match line.as_bytes()[0] {
+                b'R' => Some(number),
+                b'L' => Some(-number),
                 _ => None,
             }
         })
