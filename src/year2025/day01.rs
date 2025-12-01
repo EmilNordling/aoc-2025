@@ -4,20 +4,21 @@ pub fn parse(input: &str) -> Input {
     input
         .lines()
         .filter_map(|l| {
-           let line = l.trim();
-           if line.is_empty() {
-               return None;
-           }
+            let line = l.trim();
+            if line.is_empty() {
+                return None;
+            }
 
-           let (direction, number_str) = line.split_at(1);
-           let number: i32 = number_str.parse().ok()?;
+            let (direction, number_str) = line.split_at(1);
+            let number: i32 = number_str.parse().ok()?;
 
-           match direction {
-               "R" => Some(number),
-               "L" => Some(-number),
-               _ => None,
-           }
-        }).collect()
+            match direction {
+                "R" => Some(number),
+                "L" => Some(-number),
+                _ => None,
+            }
+        })
+        .collect()
 }
 
 pub fn part1(input: &Input) -> i32 {
@@ -47,7 +48,7 @@ pub fn part2(input: &Input) -> i32 {
             password += (reversed - step) / rhs;
         }
 
-       point = (point + step).rem_euclid(rhs);
+        point = (point + step).rem_euclid(rhs);
     }
 
     password
