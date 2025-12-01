@@ -26,9 +26,7 @@ pub fn part1(input: &Input) -> i32 {
 
     for &step in input {
         point = (point + step).rem_euclid(100);
-        if point == 0 {
-            password += 1;
-        }
+        password += (point == 0) as i32;
     }
 
     password
