@@ -44,3 +44,27 @@ fn is_invalid_id(id: &str) -> bool {
     let mid = len / 2;
     &id[..mid] == &id[mid..]
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    const TEST_INPUT: &str = "11-22,95-115,998-1012,1188511880-1188511890,222220-222224,1698522-1698528,446443-446449,38593856-38593862,565653-565659,824824821-824824827,2121212118-2121212124";
+
+    #[test]
+    fn test_invalid_id_part1() {
+        assert!(is_invalid_id("11"));
+        assert!(is_invalid_id("22"));
+        assert!(is_invalid_id("1010"));
+        assert!(is_invalid_id("1188511885"));
+        assert!(is_invalid_id("222222"));
+        assert!(is_invalid_id("446446"));
+        assert!(is_invalid_id("38593859"));
+    }
+
+    #[test]
+    fn test_part1() {
+        let input = parse(&TEST_INPUT);
+        assert_eq!(part1(&input), 1227775554);
+    }
+}
