@@ -1,8 +1,8 @@
-use aoc::year2025::day01::{parse, part1, part2};
+use aoc::year2025::day02::{parse, part1, part2};
 use std::{fs::read_to_string, time::Instant};
 
 fn main() {
-    let day = 1;
+    let day = 2;
     let path = format!("input/year2025/day{day:02}.txt");
 
     if let Ok(data) = read_to_string(&path) {
