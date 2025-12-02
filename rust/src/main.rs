@@ -3,7 +3,7 @@ use std::{fs::read_to_string, time::Instant};
 
 fn main() {
     let day = 2;
-    let path = format!("input/year2025/day{day:02}.txt");
+    let path = format!("../input/year2025/day{day:02}.txt");
 
     if let Ok(data) = read_to_string(&path) {
         let input = parse(&data);
