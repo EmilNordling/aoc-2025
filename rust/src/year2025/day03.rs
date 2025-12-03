@@ -16,7 +16,7 @@ pub fn part2(input: &Input) -> i64 {
 }
 
 fn get_joltage_from_bank(bank: &str) -> i32 {
-    let digits: Vec<u32> = bank.chars().map(|c| c.to_digit(10).unwrap()).collect();
+    let digits: Vec<u32> = bank.chars().filter_map(|c| c.to_digit(10)).collect();
     let mut max_joltage = 0;
     let mut max_first_digit = 0;
 
