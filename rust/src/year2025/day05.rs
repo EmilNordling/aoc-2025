@@ -24,7 +24,7 @@ pub fn parse(input: &str) -> Input {
     (ranges, numbers)
 }
 
-pub fn part1(input: &Input) -> i64 {
+pub fn part1(input: &Input) -> usize {
     let (ranges, numbers) = input;
     let mut result = 0;
 
@@ -40,8 +40,24 @@ pub fn part1(input: &Input) -> i64 {
     result
 }
 
-pub fn part2<'a>(_input: &'a Input) -> i32 {
-    0
+pub fn part2(input: &Input) -> usize {
+    let mut sorted_ranges = input.0.clone();
+    sorted_ranges.sort_unstable_by_key(|(start, _)| *start);
+
+    sorted_ranges
+        .into_iter()
+        .fold(Vec::new(), |mut merged: Vec<(i64, i64)>, (start, end)| {
+            match merged.last_mut() {
+                Some(last) if start <= last.1 + 1 => {
+                    last.1 = last.1.max(end);
+                }
+                _ => merged.push((start, end)),
+            }
+            merged
+        })
+        .into_iter()
+        .map(|(start, end)| (end - start + 1) as usize)
+        .sum()
 }
 
 #[cfg(test)]
@@ -64,5 +80,11 @@ mod tests {
     fn test_part1() {
         let input = parse(&TEST_INPUT);
         assert_eq!(part1(&input), 3);
+    }
+
+    #[test]
+    fn test_part2() {
+        let input = parse(&TEST_INPUT);
+        assert_eq!(part2(&input), 14);
     }
 }
